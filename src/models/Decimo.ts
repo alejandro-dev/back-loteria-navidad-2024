@@ -20,7 +20,7 @@ class Decimo extends Model<IDecimo> implements IDecimo {
     public premiado!: boolean;
     public isPredrea!: boolean;
     public userId!: number;
-    public User?: User;
+    public user?: User;
 
     // Timestamps
     public readonly createdAt!: Date;
@@ -63,5 +63,9 @@ Decimo.init(
         modelName: 'decimo',
     }
 );
+
+// Relaciones
+Decimo.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Decimo, { foreignKey: 'userId' });
 
 export default Decimo;

@@ -65,11 +65,11 @@ const getPremios = async () => {
             try {
                 // Generamos el mensaje
                 let message = '';
-                if(decimo.isPredrea) message = '¡Enhorabuena! Tu número ha sido premiado en la pedrea';
-                if(!decimo.isPredrea) message = '¡Enhorabuena! Tu número ha sido premiado con un premio gordo';
+                if(decimo.isPredrea) message = `¡Enhorabuena! Tu número ${decimo.numero} ha sido premiado en la pedrea.`;
+                if(!decimo.isPredrea) message = `¡Enhorabuena! Tu número ${decimo.numero} ha sido premiado con un premio gordo`;
 
                 // Enviamos el email
-                sendEmail(decimo.User?.email || '', { message });
+                sendEmail(decimo.user?.email || '', { message: message });
 
             } catch (error) {
                 console.log('Error al enviar el email');
@@ -79,7 +79,7 @@ const getPremios = async () => {
 }
 
 // Añadir datos
-const addData  = async (req: Request, res: Response, next: NextFunction) => {
+const addData  = async (req: Request, res: Response) => {
     const { lotteryNumbers, email } = req.body;
 
     // Comprobamos que se han enviado los datos
